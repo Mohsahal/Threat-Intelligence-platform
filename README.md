@@ -18,8 +18,7 @@ threat-intelligence-platform/
 ├── database.py             # MongoDB connection manager
 ├── config.py               # Config loader (reads .env)
 ├── logger.py               # Centralised logging
-│
-├── test_platform.py        # Integration test / demo script
+├── streamlit_app.py        # Optional Streamlit dashboard
 │
 ├── .env                    # Your environment variables (git-ignored)
 ├── .env.example            # Template – copy to .env
@@ -84,6 +83,14 @@ You should see:
  * Running on http://0.0.0.0:5000
 ```
 
+### 6. (Optional) Streamlit dashboard
+
+With MongoDB configured, you can collect and browse indicators in a browser UI (no Flask required for this UI):
+
+```bash
+streamlit run streamlit_app.py
+```
+
 ---
 
 ## 🌐 REST API Reference
@@ -137,19 +144,14 @@ Thresholds are configurable via `LOW_THRESHOLD` and `HIGH_THRESHOLD` in `.env`.
 
 ---
 
-## 🧪 Running the Tests
+## 🧪 Quick API check
 
-> ⚠️ The Flask server must be running before running the test script.
+With the Flask API running (`python app.py`), verify health and list threats:
 
 ```bash
-# Terminal 1
-python app.py
-
-# Terminal 2
-python test_platform.py
+curl -s http://localhost:5000/health
+curl -s http://localhost:5000/threats
 ```
-
-The test script exercises all 6 API endpoints and prints a summary.
 
 ---
 
